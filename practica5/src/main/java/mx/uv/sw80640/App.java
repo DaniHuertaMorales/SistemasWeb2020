@@ -27,6 +27,19 @@ public class App
         before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
 
         get("/", (req, res) -> "Hola desde Spark");
-        get("/adios", (req, res) -> "Adios desde Spark");
+        get("/hola", (req, res) -> {
+            System.out.println("Request: " + req.queryParams());
+            System.out.println("Request: " + req.queryParams("PrmEmail"));
+            System.out.println("Request: " + req.queryParams("PrmPassword"));
+            System.out.println("Request: " + req.contentType());
+            return "Hola" + req.queryParams("PrmEmail" + "desde Spark");
+        });
+
+        post("/adios", (req, res) -> {
+            System.out.println("Request: " + req.queryParams());
+            System.out.println("Request: " + req.queryParams("PrmEmail"));
+            System.out.println("Request: " + req.queryParams("PrmPassword"));
+            return "Adios" + req.queryParams("PrmEmail" + "desde Spark");
+        });
     }
 }
